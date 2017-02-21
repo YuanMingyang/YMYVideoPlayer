@@ -9,20 +9,28 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+
+}
+
+- (IBAction)nextBtnClick:(id)sender {
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"colgate.mp4" ofType:nil];
+//    [self.videoView replaceVideoWithUrl:[NSURL fileURLWithPath:path]];
+//    [self.videoView replaceVideoWithUrl:[NSURL URLWithString:@"http://flv2.bn.netease.com/videolib3/1510/25/bIHxK3719/SD/bIHxK3719-mobile.mp4"]];
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
+    return YES;
 }
 
 
