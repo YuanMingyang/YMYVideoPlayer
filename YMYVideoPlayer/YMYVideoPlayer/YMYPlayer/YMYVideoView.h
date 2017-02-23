@@ -39,8 +39,6 @@
 +(instancetype)videoView;
 /** 需要播放视频的url */
 @property(nonatomic,strong)NSURL *videoUrl;
-/** 当前播放器所在的ViewController 将此属性设置为当前controller */
-@property(nonatomic,strong)UIViewController *fatherController;
 /** 协议 */
 @property(nonatomic,strong)id<YMYVideoViewDelegate>deleate;
 /** 切换视频 */

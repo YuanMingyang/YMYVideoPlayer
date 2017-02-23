@@ -8,7 +8,6 @@
 
 #import "YMYVideoView.h"
 #import <AVFoundation/AVFoundation.h>
-#import "YMYFullController.h"
 @interface YMYVideoView()
 @property(nonatomic,strong)AVPlayer *player;
 @property(nonatomic,strong)AVPlayerItem *playerItem;
@@ -17,7 +16,6 @@
 @property(nonatomic,strong)NSTimer *statusTimer;
 @property(nonatomic,strong)NSTimer *sliderTimer;
 @property(nonatomic,assign)BOOL isNeedStatus;
-@property(nonatomic,strong)YMYFullController *fullVC;
 @property(nonatomic,assign)CGRect oldFrame;
 @end
 @implementation YMYVideoView
@@ -38,9 +36,9 @@
     self.player = [[AVPlayer alloc] init];
     self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
     self.playerLayer.frame = self.backImageView.bounds;
+    //self.playerLayer.backgroundColor = [UIColor redColor].CGColor;
     [self.backImageView.layer addSublayer:self.playerLayer];
-    
-    self.fullVC = [[YMYFullController alloc] init];
+
     
     self.backImageView.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(updataStatusBar)];
@@ -79,11 +77,9 @@
 
 - (IBAction)backBtnClick:(UIButton *)sender {
     if (self.fullScreenBtn.selected) {
-        [self.fullVC dismissViewControllerAnimated:NO completion:^{
-            [self.fatherController.view addSubview:self];
-            [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionLayoutSubviews animations:^{
-                self.frame = self.oldFrame;
-            } completion:nil];
+        [UIView animateWithDuration:0.2 animations:^{
+            [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIDeviceOrientationPortrait] forKey:@"orientation"];
+            self.frame = self.oldFrame;
         }];
         self.fullScreenBtn.selected = NO;
     }else{
@@ -107,19 +103,14 @@
         self.oldFrame = self.frame;
     });
     if (!sender.selected) {
-        [self.fatherController presentViewController:self.fullVC animated:NO completion:^{
-            [self.fullVC.view addSubview:self];
-            self.center = self.fullVC.view.center;
-            [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionLayoutSubviews animations:^{
-                self.frame = self.fullVC.view.bounds;
-            } completion:nil];
+        [UIView animateWithDuration:0.2 animations:^{
+            [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIDeviceOrientationLandscapeLeft] forKey:@"orientation"];
+            self.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
         }];
     }else{
-        [self.fullVC dismissViewControllerAnimated:NO completion:^{
-            [self.fatherController.view addSubview:self];
-            [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionLayoutSubviews animations:^{
-                self.frame = self.oldFrame;
-            } completion:nil];
+        [UIView animateWithDuration:0.2 animations:^{
+            [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIDeviceOrientationPortrait] forKey:@"orientation"];
+            self.frame = self.oldFrame;
         }];
     }
 
