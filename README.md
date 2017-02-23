@@ -13,7 +13,6 @@ a videoPlayer for Objective-C
     self.videoView = [YMYVideoView videoView];
     self.videoView.frame = CGRectMake(0, 70, self.view.bounds.size.width, self.view.bounds.size.width*9/17);
     self.videoView.videoUrl = [NSURL URLWithString:@"http://flv2.bn.netease.com/videolib3/1510/25/bIHxK3719/SD/bIHxK3719-mobile.mp4"];
-    self.videoView.fatherController = self;
     self.videoView.deleate = self;
     [self.view addSubview:self.videoView];
 
